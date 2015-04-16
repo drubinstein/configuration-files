@@ -14,8 +14,7 @@
 
 source /etc/profile
 
-export PATH=/home/avru/bin:/home/avru/scripts:$PATH
-export PATH=/opt/MATLAB/R2013a/bin:$PATH
+export PATH=/home/:$PATH
 
 export BROWSER="chrome-unstable"
 export EDITOR="vim"
@@ -37,4 +36,6 @@ if tty -s ; then
 fi
 
 set editing-mode vi
+bindkey -v
+set KEYTIMEOUT=1
 set blink-matching-paren on
