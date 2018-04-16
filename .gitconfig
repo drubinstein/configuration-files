@@ -1,0 +1,33 @@
+[user]
+	name = David Rubinstein
+	email = drubinstein91@gmail.com
+[core]
+	editor = vim
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	di = diff
+	list-remotes = !bash -c ‘git branch -r | grep -o \"\\S*/${1:-master}$\" | sort | uniq' -
+	oldest-ancestor = !bash -c '(diff -u <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") && echo \" HEAD\") |
+	ll = !bash -c ‘git log --oneline --decorate --graph master `git list-remotes master` ${1:-HEAD} ^`git oldest-ancestor ${1:-HEAD} origin/master`~3' -
+	l = log --oneline --decorate --graph
+	r = rebase
+	ri = rebase -i
+	rc = rebase --continue
+	rs = rebase --skip
+	cp = cherry-pick
+	sm = submodule
+	st = status -s -b
+	ru = remote update
+	timeline = log --graph --branches --pretty=oneline --decorate
+	fixup = !sh -c ‘git commit -m \"fixup! $(git log -1 --format=%s $@)\"' -
+	squash = !sh -c ‘git commit -m \"squash! $(git log -1 --format=%s $@)\"' -
+	ignored-files = ls-files --others -i --exclude-standard
+	modified-files = ls-files -m
+	untracked-files = ls-files -o --exclude-standard
+	unstaged = !sh -c ‘git l `git for-each-ref refs/heads --format=%\\(refname\\)` ^staging'
+	git = !exec git
+	gud = !man git
+	root = !bash -c 'cd `git rev-parse --show-toplevel`'
+	tracked = status -sbuno
