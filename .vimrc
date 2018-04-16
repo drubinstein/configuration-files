@@ -1,4 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Based on:
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: 
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
@@ -39,6 +41,75 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+" python and other langs code checker
+" Plugin 'vim-syntastic/syntastic'
+Plugin 'w0rp/ale'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/Conque-Shell'
+"Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'scrooloose/nerdtree'
+"Code commenter
+Plugin 'scrooloose/nerdcommenter'
+"python-vim
+Plugin 'klen/python-mode'
+"Git interpretation
+Plugin 'tpope/vim-fugitive'
+" Code and files fuzzy finder
+" Plugin 'kien/ctrlp.vim'
+" Extension to ctrlp, for fuzzy command finder
+" Plugin 'fisadev/vim-ctrlp-cmdpalette'
+" Automatically detect indentation depth, soft-tabs, etc.
+Plugin 'yaifa.vim'
+" Scala
+Plugin 'derekwyatt/vim-scala'
+"Indent guides
+Plugin 'Yggdroot/indentLine'
+" Autocompletion
+Plugin 'Shougo/neocomplete'
+" fzf
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+" Show git status in the gutter
+Plugin 'airblade/vim-gitgutter'
+" Vim statusline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+let g:ariline_extensions_syntastic_enabled = 0
+"let g:airline#extensions#tabline#enabled = 1
+" Colorschemes package
+Plugin 'flazz/vim-colorschemes'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -93,7 +164,7 @@ endif
 set ruler
 
 " Height of the command bar
-set cmdheight=2
+set cmdheight=1
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -148,7 +219,7 @@ set foldcolumn=1
 syntax enable 
 
 try
-    colorscheme monokai_custom
+    colorscheme monokai
 catch
 endtry
 
@@ -185,7 +256,7 @@ set noswapfile
 set backspace=indent,eol,start
 
 " Use smart indentation
-set smartindent
+"set smartindent
 
 " Use spaces instead of tabs
 set expandtab
@@ -196,6 +267,9 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+
+" yaml indentation
+au FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 	    
 " changing how tabs are hilighted
 set listchars=eol:$,tab:\|—,trail:⋅,nbsp:⋅
@@ -286,7 +360,7 @@ set viminfo^=%
 
 " Format the status line
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
+" set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L] 
 " Always show the status line
 set laststatus=2
 
@@ -482,3 +556,151 @@ set nu
  map <F10> :ConqueTermSplit bash <CR> 
  map <F11> : e! <CR>
  map <F12> : %!xxd <CR>
+
+ "Nerdtree specific
+ "Open on tab
+ map <Tab> :NERDTreeToggle<CR>
+ " open nerdtree with the current file selected
+ nmap <leader>tf :NERDTreeFind<CR>
+ " dont show these file types
+ let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+
+ " For syntastic - switch between python versions
+ " let g:syntastic_python_flake8_exec = 'python3'
+ " let g:syntastic_python_flake8_args = ['m', 'flake8']
+ " let g:syntastic_python_pylint_args = '--rcfile=/Users/davidrubinstein/.pylintrc'
+ " let g:syntastic_python_pylint_args = '--rcfile=/Users/davidrubinstein/.pylintrc'
+ " For ALE (async lint engine) -----------------------------
+ let g:ale_python_flake8_args = '--ignore=E501'
+ let g:ale_sign_error = '✘'
+ let g:ale_sign_warning = '≫'
+ let g:airline#extensions#ale#enabled = 1
+ let g:ale_python_pylint_options = '--rcfile=/Users/davidrubinstein/.pylintrc'
+ let g:ale_lint_delay = 1000
+ 
+ " For git
+ autocmd Filetype gitcommit setlocal spell textwidth=72
+
+" Python-mode ------------------------------
+
+" don't use linter, we use syntastic for that
+let g:pymode_lint = 0
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_signs = 0
+" don't fold python code on open
+let g:pymode_folding = 0
+" don't load rope by default. Change to 1 to use rope
+let g:pymode_rope = 0
+" open definitions on same window, and custom mappings for definitions and
+" occurrences
+let g:pymode_rope_goto_definition_bind = ',d'
+let g:pymode_rope_goto_definition_cmd = 'e'
+nmap <leader>D :tab split<CR>:PymodePython rope.goto()<CR>
+nmap <leader>o :RopeFindOccurrences<CR>
+" don't set breakpoints
+let g:pymode_breakpoint = 0
+let g:pymode_options_max_line_length = 99
+
+" CtrlP ------------------------------
+
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+
+" tags (symbols) in current file finder mapping
+nmap <leader>tg :CtrlPBufTag<CR>
+" tags (symbols) in all files finder mapping
+nmap <leader>tG :CtrlPBufTagAll<CR>
+" general code finder in all files mapping
+nmap <leader>f :CtrlPLine<CR>
+" recent files finder mapping
+nmap <leader>m :CtrlPMRUFiles<CR>
+" commands finder mapping
+nmap <leader>c :CtrlPCmdPalette<CR>
+" to be able to call CtrlP with default search text
+function! CtrlPWithSearchText(search_text, ctrlp_command_end)
+    execute ':CtrlP' . a:ctrlp_command_end
+    call feedkeys(a:search_text)
+endfunction
+" same as previous mappings, but calling with current word as default text
+nmap <leader>wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
+nmap <leader>wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
+nmap <leader>wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
+nmap <leader>we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
+nmap <leader>pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
+nmap <leader>wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
+nmap <leader>wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
+
+" Show .hidden files
+let g:ctrlp_show_hidden = 1
+" Use the nearest .git directory as the cwd
+let g:ctrlp_working_path_mode = 'r'
+" ignore these files and folders on file finder
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|\.hg|\.svn|\.build|_site)$',
+  \ 'file': '\.pyc$\|\.pyo$|\.log$'
+  \ }
+
+" Relative line numbers
+"""""""""""""""""""""""
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+" Ctrl+n toggles between relative and absolute line numbers
+nnoremap <C-n> :call NumberToggle()<cr>
+
+" Switch to absolute line number when vim loses focus
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
+
+" Switch to absolute line numbers in edit mode
+autocmd InsertEnter * :set number
+autocmd InsertLeave * :set relativenumber
+
+" Syntastic ------------------------------
+
+" show list of errors and warnings on the current file
+nmap <leader>e :Errors<CR>
+" check also when just opened the file
+"let g:syntastic_check_on_open=1
+"let g:syntastic_enable_signs=1
+"let g:syntastic_error_symbol='✘'
+"let g:syntastic_warning_symbol='≫'
+"highlight SyntasticErrorSign ctermfg=1 ctermbg=248 guifg=Red guibg=Grey
+"highlight SyntasticWarningSign ctermfg=4 ctermbg=248 guifg=Purple guibg=Grey
+"let g:syntastic_enable_highlighting=1
+""let g:syntastic_style_warning_symbol='⚠'
+"let g:syntastic_style_enable_highlighting=1
+"let g:syntastic_python_checkers = ['pylint', 'pylint3']
+"let g:syntastic_python_pylint_args='--max-line-length=100 --disable=C0103,C0111'
+"let g:syntastic_quiet_messages = { \"type\": \"style\" }
+"let g:syntastic_coffee_lint_options = \"-f ~/.vim/bundle/vim-coffee-script/coffeelint-config.json\"
+"let g:syntastic_cpp_checkers = []
+
+" Indentline settings
+let g:indentLine_color_term = 239
+let g:indentLine_enabled = 1
+ 
+" FZF ------------------------------
+"
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+nmap <C-p> :Files<CR>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>a :Ag --python 
+
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
