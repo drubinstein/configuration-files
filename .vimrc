@@ -524,18 +524,18 @@ autocmd FileType makefile setlocal noexpandtab
 autocmd FileType Make setlocal noexpandtab
 autocmd FileType Makefile setlocal noexpandtab
 
-augroup cpp
-    au BufNewFile *.cpp 0r ~/.vim/skeleton.cpp
-    au BufNewFile *.h 0r ~/.vim/skeleton.h
-augroup end
-
-augroup c
-    au BufNewFile *.c 0r ~/.vim/skeleton.c
-augroup end
-
-augroup sh
-    au BufNewFile *.sh 0r ~/.vim/skeleton.sh
-augroup end
+"augroup cpp
+"    au BufNewFile *.cpp 0r ~/.vim/skeleton.cpp
+"    au BufNewFile *.h 0r ~/.vim/skeleton.h
+"augroup end
+"
+"augroup c
+"    au BufNewFile *.c 0r ~/.vim/skeleton.c
+"augroup end
+"
+"augroup sh
+"    au BufNewFile *.sh 0r ~/.vim/skeleton.sh
+"augroup end
 
 augroup tex
     au BufNewFile *.tex 0r ~/.vim/skeleton.tex
