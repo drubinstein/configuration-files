@@ -14,17 +14,19 @@ function setup(){
     if ln --version 2>/dev/null | grep -q 'oreutils'; then
         # GNU
         echo "GNU detected"
-        for conf in ".vim" ".tmux.conf" ".zshrc" ".dir_colors" ".oh-my-zsh"; do
+        for conf in ".vim" ".tmux.conf" ".zshrc" ".dir_colors"; do
             ln -sf ~/${conf} ${CONFIG_ROOT}/${conf}
         done
         ln -sf ~/.vim/basic.vim ${CONFIG_ROOT}/vimrc/vimrcs/basic.vim
+        ln -sf ~/.oh-my-zsh ${CONFIG_ROOT}/oh-my-zsh
     else
         # BSD
         echo "BSD Detected"
-        for conf in ".vim" ".tmux.conf" ".zshrc" ".dir_colors" ".oh-my-zsh"; do
+        for conf in ".vim" ".tmux.conf" ".zshrc" ".dir_colors"; do
             ln -sf ${CONFIG_ROOT}/${conf} ~/${conf}
         done
         ln -sf ${CONFIG_ROOT}/vimrc/vimrcs/basic.vim ~/.vim/basic.vim
+        ln -sf ${CONFIG_ROOT}/oh-my-zsh ~/.oh-my-zsh
     fi
 
     # Setup vim
