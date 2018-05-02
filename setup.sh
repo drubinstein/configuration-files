@@ -7,6 +7,10 @@ function update(){
 function setup(){
     git submodule init
     update
+
+    echo "Installing oh-my-zsh. Note this will set the default shell to zsh"
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
     # Setup symlinks for easier updates
     CONFIG_ROOT="$( cd "$(dirname "$0")" ; pwd -P )"
 
@@ -18,7 +22,6 @@ function setup(){
             ln -sf ~/${conf} ${CONFIG_ROOT}/${conf}
         done
         ln -sf ~/.vim/basic.vim ${CONFIG_ROOT}/vimrc/vimrcs/basic.vim
-        ln -sf ~/.oh-my-zsh ${CONFIG_ROOT}/oh-my-zsh
     else
         # BSD
         echo "BSD Detected"
@@ -26,15 +29,11 @@ function setup(){
             ln -sf ${CONFIG_ROOT}/${conf} ~/${conf}
         done
         ln -sf ${CONFIG_ROOT}/vimrc/vimrcs/basic.vim ~/.vim/basic.vim
-        ln -sf ${CONFIG_ROOT}/oh-my-zsh ~/.oh-my-zsh
     fi
 
     # Setup vim
     echo "Installing vim plugins"
     vim +PlugInstall +qa
-
-    echo "Setting ZSH to default shell. If you use mac I recommend you run brew install zsh before running this step."
-    chsh -s $(which zsh)
 }
 
 $1
