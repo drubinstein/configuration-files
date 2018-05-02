@@ -4,6 +4,3 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "zsh-dircolors-solarized"]
-	path = zsh-dircolors-solarized
-	url = https://github.com/joel-porquet/zsh-dircolors-solarized.git
