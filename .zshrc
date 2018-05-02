@@ -1,38 +1,33 @@
-# /etc/zsh/zshrc: system-wide .zshrc file for zsh(1)
-#
-# Originally based on configuration by Calogero Lo Leggio
-# <kalos@nerdrug.org>
-#
-# Part of this configuration has based on various configuration files
-# taken from the web...  the most important references are:
-# http://strcat.de/zsh/ http://www.jukie.net/~bart/conf/
-#
-# bash and zsh config file load order:
-# http://shreevatsa.wordpress.com/2008/03/30/zshbash-startup-files-loading-order-bashrc-zshrc-etc/
-#
-# This file is sourced only for interactive shells. It should contain
-# commands to set up aliases, functions, options, key bindings, etc.
-#
-# Global Order: zshenv, zprofile, zshrc, zlogin
+# Path to your oh-my-zsh installation.
+export ZSH=~/.oh-my-zsh
 
-# Set the "umask" (see "man umask"):
-# umask 002 # relaxed   -rwxrwxr-x
-# umask 022 # cautious  -rwxr-xr-x
-# umask 027 # uptight   -rwxr-x---
-# umask 077 # paranoid  -rwx------
-# umask 066 # bofh-like -rw-------
-umask 002
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
-# If root set umask to 022 to prevent new files being created group and world writable
-#if (( EUID == 0 )); then
-#    umask 022
-#fi
+# Command auto correction
+ENABLE_CORRECTION="true"
 
-#export TERM=rxvt-unicode-256color
+# Make svn, git, etc. much faster
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-setopt extended_glob
-for zsh_config in ~/.zsh.d/[0-9][0-9]*[^~] ; do
-    source $zsh_config
-done
+# Set timestamp format in history
+HIST_STAMPS="yyyy-mm-dd"
 
-eval $( dircolors -b $HOME/LS_COLORS/LS_COLORS )
+plugins=(
+  git
+  svn
+  brew
+  docker-compose
+  docker
+  git-prompt
+  systemd
+  tmux
+  vi-mode 
+)
+
+source $ZSH/oh-my-zsh.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+

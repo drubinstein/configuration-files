@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/afs/ee.cooper.edu/user/r/u/rubins/.remmina'
-let g:netrw_dirhist_2='/afs/ee.cooper.edu/user/r/u/rubins.rmon'
-let g:netrw_dirhist_3='/home/david/.ssh'
