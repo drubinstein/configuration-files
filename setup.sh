@@ -30,7 +30,11 @@ function setup(){
     fi
 
     # Setup vim
+    echo "Installing vim plugins"
     vim +PlugInstall +qa
+
+    echo "Setting ZSH to default shell. If you use mac I recommend you run brew install zsh before running this step."
+    chsh -s $(which zsh)
 }
 
 $1
