@@ -5,6 +5,8 @@ nnoremap ; :
 set nu
 "Syntax highlighting
 syntax enable
+"colorscheme
+colorscheme Monokai
 
 "F-keys
  map <F3> :if exists("syntax_on") <Bar> syntax off <Bar> else <Bar> syntax on <Bar> endif <CR>
@@ -51,3 +53,6 @@ autocmd FileType yaml setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+
+" dont show tab line
+set showtabline=0

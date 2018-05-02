@@ -28,7 +28,7 @@ Plug 'klen/python-mode'
 "Git interpretation
 Plug 'tpope/vim-fugitive'
 " Automatically detect indentation depth, soft-tabs, etc.
-Plug 'yaifa.vim'
+Plug 'vim-scripts/yaifa.vim'
 " Scala
 Plug 'derekwyatt/vim-scala'
 "Indent guides
@@ -49,7 +49,7 @@ call plug#end()
 "Airline
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
-let g:ariline_extensions_syntastic_enabled = 0
+"let g:ariline_extensions_syntastic_enabled = 0
 "let g:airline#extensions#tabline#enabled = 1
 
 " Ack.vim
