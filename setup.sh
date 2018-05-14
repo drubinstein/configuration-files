@@ -34,6 +34,17 @@ function setup(){
     # Setup vim
     echo "Installing vim plugins"
     vim +PlugInstall +qa
+
+    # Install powerline fonts
+    # clone
+    git clone https://github.com/powerline/fonts.git --depth=1
+    # install
+    cd fonts
+    ./install.sh
+    # clean-up a bit
+    cd ..
+    rm -rf fonts
+    echo "To use oh-my-zsh with powerline set your terminal's font to a powerline font"
 }
 
 $1
