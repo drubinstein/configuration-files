@@ -43,6 +43,17 @@ Plug 'vim-airline/vim-airline-themes'
 " Colorschemes package
 Plug 'flazz/vim-colorschemes'
 
+Plug 'leafgarland/typescript-vim'
+Plug 'junegunn/limelight.vim'
+" Explain why a character is highlighted
+Plug 'vim-scripts/SyntaxAttr.vim'
+
+" For JS
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
+
+" Python
+Plug 'python/black'
 
 call plug#end()
 
@@ -67,12 +78,21 @@ endif
  let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
  " For ALE (async lint engine) -----------------------------
- let g:ale_python_flake8_args = '--ignore=E501'
+ let g:ale_python_flake8_options = '--ignore=E501'
+ let g:ale_python_pylint_options = '--ignore=E501'
+ let g:ale_python_black_options = '--ignore=E501'
  let g:ale_sign_error = '✘'
  let g:ale_sign_warning = '≫'
  let g:airline#extensions#ale#enabled = 1
- let g:ale_python_pylint_options = '--rcfile=/Users/davidrubinstein/.pylintrc'
+" let g:ale_python_pylint_options = '--rcfile=/Users/davidrubinstein/.pylintrc'
  let g:ale_lint_delay = 1000
+ let g:ale_c_build_dir = './build'
+ " let g:ale_c_parse_compile_commands = 1
+ let g:ale_cpp_build_dir = './build'
+ let g:ale_cpp_parse_compile_commands = 1
+ " let g:ale_lint_on_save = 1
+ " let g:ale_lint_on_text_changed = 'never'
+ " let g:ale_lint_on_enter = 0
 
 " Relative line numbers
 """""""""""""""""""""""
@@ -124,6 +144,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 let g:pymode_lint = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_signs = 0
+let g:pymode_lint_ignore = "E501"
 " don't fold python code on open
 let g:pymode_folding = 0
 " don't load rope by default. Change to 1 to use rope
@@ -136,5 +157,11 @@ nmap <leader>D :tab split<CR>:PymodePython rope.goto()<CR>
 nmap <leader>o :RopeFindOccurrences<CR>
 " don't set breakpoints
 let g:pymode_breakpoint = 0
-let g:pymode_options_max_line_length = 99
+let g:pymode_options_max_line_length = 1000
+
+" SyntaxAttr ------------------------------
+map -a :call SyntaxAttr()<CR>
+
+" vim-javascript --------------------------
+let g:javascript_plugin_flow = 1
 

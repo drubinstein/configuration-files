@@ -37,11 +37,11 @@ set expandtab
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " File type specific
-autocmd FileType cpp match ErrorMsg '\%>79v.\+'
+autocmd FileType cpp match ErrorMsg '\%>120v.\+'
 autocmd FileType make setlocal noexpandtab
 autocmd FileType makefile setlocal noexpandtab
 autocmd FileType Make setlocal noexpandtab
@@ -56,3 +56,9 @@ let g:mapleader = ","
 
 " dont show tab line
 set showtabline=0
+
+" Jsonify a file
+command J :%!python -m json.tool
+
+" Turn line wrapping on
+set wrap

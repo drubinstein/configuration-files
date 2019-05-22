@@ -7,3 +7,5 @@ source ~/.vim/plugins.vim
 " Now add custom vimrc stuff
 source ~/.vim/custom.vim
 
+" Add clang-format in
+source ~/.vim/clang.vim
