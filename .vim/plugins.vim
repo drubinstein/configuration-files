@@ -54,6 +54,7 @@ Plug 'moll/vim-node'
 
 " Python
 Plug 'python/black'
+Plug 'integralist/vim-mypy'
 
 call plug#end()
 
