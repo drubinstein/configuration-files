@@ -166,3 +166,5 @@ map -a :call SyntaxAttr()<CR>
 " vim-javascript --------------------------
 let g:javascript_plugin_flow = 1
 
+" python/black ----------------------------
+autocmd BufWritePost *.py execute ':Black'
