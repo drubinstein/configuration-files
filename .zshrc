@@ -25,9 +25,27 @@ plugins=(
   systemd
   tmux
   vi-mode 
+  jsontools
 )
 
 source ${ZSH}/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/drubinstein/gcloud/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/drubinstein/gcloud/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/drubinstein/gcloud/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/drubinstein/gcloud/google-cloud-sdk/completion.zsh.inc'; fi
+
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+export PATH=/usr/local/opt/ccache/libexec:/usr/local/bin:/usr/local/sbin:$PATH
+
+eval "$(pyenv init -)"
+
+export CMAKE_EXPORT_COMPILE_COMMANDS=ON
+export USE_CCACHE=true
+export CCACHE_CPP2=yes
