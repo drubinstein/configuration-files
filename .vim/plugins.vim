@@ -50,7 +50,10 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 
 " For JS
 Plug 'pangloss/vim-javascript'
-Plug 'moll/vim-node'
+" Plug 'moll/vim-node'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " Python
 Plug 'python/black'
@@ -166,5 +169,6 @@ map -a :call SyntaxAttr()<CR>
 " vim-javascript --------------------------
 let g:javascript_plugin_flow = 1
 
-" python/black ----------------------------
+" formatters  ----------------------------
 autocmd BufWritePost *.py execute ':Black'
+autocmd BufWritePost *.js,*.ts execute ':Prettier'
